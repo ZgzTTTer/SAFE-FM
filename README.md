@@ -34,7 +34,7 @@ SAFE-FM addresses this limitation through three components:
 ### 1. Condition-Mixed Source Prior
 
 <p align="center">
-  <img src="examples/static/1.png" width="88%" alt="Condition-Mixed Source Prior">
+  <img src="examples/static/1.png" width="50%" alt="Condition-Mixed Source Prior">
 </p>
 
 <p align="center">
