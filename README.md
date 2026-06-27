@@ -43,10 +43,10 @@ SAFE-FM addresses this limitation through three components:
 
 Instead of starting solely from Gaussian noise, SAFE-FM constructs a source-anchored initial state by combining normalized source anatomy with Gaussian noise:
 
-[
+$$
 x_0 = \sqrt{\lambda}\phi(c_k) + \sqrt{1-\lambda}\epsilon,
 \quad \epsilon \sim \mathcal{N}(0, I).
-]
+$$
 
 Here, (c_k) denotes the source center slice, (\phi(\cdot)) denotes the normalized source-dependent anatomical representation, and (\lambda) controls the trade-off between source guidance and stochastic flexibility.
 
