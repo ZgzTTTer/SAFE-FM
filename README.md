@@ -279,6 +279,12 @@ SAFE-FM/
 ├── LICENSE
 └── THIRD_PARTY_NOTICES.md
 ```
+---
+
+## Citation
+
+If you find this repository useful in your research, please consider citing our paper:
+...
 
 ---
 
