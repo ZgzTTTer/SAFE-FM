@@ -1,0 +1,9 @@
+SimpleITK==2.5.3
+lpips==0.1.4
+POT==0.9.6.post1
+scikit-image==0.26.0
+scipy==1.17.1
+matplotlib==3.10.8
+PyYAML==6.0.3
+tqdm==4.67.3
+tensorboard==2.20.0

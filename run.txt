@@ -1,0 +1,35 @@
+# SAFE-FM / SynthRAD 2.5D
+# 目标：训练 / 验证 / 测试都只在 mask 内计算损失或指标
+# 说明：把下面 /你的数据路径/SynthRAD2025 改成你自己的数据根目录
+
+# =========================
+# 1) Train
+# =========================
+# 默认 SAFE-FM
+python synthrad/main.py --data_root ../datasets/SynthRAD2025 --task task1 --anatomy HN --epochs 200 --batch_size 4 --device cuda:1 --use_mask true --keep_ratio 0.2 --mask_margin 10 --asa_alpha 0.3 --boundary_lambda 0.001 --run_name ema_hn_lambda0.001 --use_ema true --val_solver euler --base_channels 64 --channel_mults 1 4 8
+
+# OT-CFM 变体
+python main.py --data_root /你的数据路径/SynthRAD2025 --task task1 --anatomy HN --fm_method otcfm --epochs 500 --batch_size 8 --device cuda:0 --use_mask true --keep_ratio 1.0 --mask_margin 10
+
+# Schrödinger Bridge 变体
+python main.py --data_root /你的数据路径/SynthRAD2025 --task task1 --anatomy HN --fm_method sbcfm --sigma 0.1 --epochs 500 --batch_size 8 --device cuda:0 --use_mask true --keep_ratio 1.0 --mask_margin 10
+
+# VP-CFM 变体
+python main.py --data_root /你的数据路径/SynthRAD2025 --task task1 --anatomy HN --fm_method vpcfm --epochs 500 --batch_size 8 --device cuda:0 --use_mask true --keep_ratio 1.0 --mask_margin 10
+
+# =========================
+# 2) Validation
+# =========================
+python synthrad/test.py --checkpoint ./outputs/sensitivity/ema_hn_lambda1/ema_best_psnr.pth --data_root ../datasets/SynthRAD2025 --task task1 --anatomy HN --split test --device cuda:1 --use_mask true --keep_ratio 0.2 --mask_margin 10 --asa_alpha 0.3 --boundary_lambda 1.0 --use_ema true --solver euler --num_steps 50 --base_channels 64 --channel_mults 1 4 8
+
+# =========================
+# 3) Test
+# =========================
+python synthrad/test.py --checkpoint ./checkpoints/cfm_ff_asa_br_task1_HN/best_ssim.pth --data_root /你的数据路径/SynthRAD2025 --task task1 --anatomy HN --split test --device cuda:0 --use_mask true --keep_ratio 1.0 --mask_margin 10
+
+# Heun solver + 保存图像
+python synthrad/test.py --checkpoint ./checkpoints/cfm_ff_asa_br_task1_HN/best_ssim.pth --data_root /你的数据路径/SynthRAD2025 --task task1 --anatomy HN --split test --device cuda:0 --solver heun --num_steps 100 --use_mask true --keep_ratio 1.0 --mask_margin 10 --save_images --output_dir ./test_results
+
+# 说明
+# 1. 训练、验证、测试都按 use_mask=true 走 mask 内统计
+# 2. 横向比较时建议固定所有数据和推理参数
