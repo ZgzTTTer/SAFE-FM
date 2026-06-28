@@ -57,11 +57,11 @@ This design shifts the initial distribution toward patient-specific anatomy whil
 ### 2. Training and Inference Workflow
 
 <p align="center">
-  <img src="examples/static/2.png" width="96%" alt="SAFE-FM Training and Inference Workflow">
+  <img src="examples/static/3.png" width="96%" alt="SAFE-FM Training and Inference Workflow">
 </p>
 
 <p align="center">
-  <a href="examples/static/2.pdf">View PDF version</a>
+  <a href="examples/static/3.pdf">View PDF version</a>
 </p>
 
 During training, SAFE-FM uses the source slice triplet consisting of the previous, center, and next slices as contextual input. The feature-adaptive fusion module extracts a fused 2.5D condition representation. A condition-mixed source prior initializes the flow trajectory, and the velocity network is optimized using masked flow-matching loss together with boundary-aware velocity gradient regularization.
@@ -73,11 +73,11 @@ During inference, SAFE-FM starts from the same source-anchored initialization an
 ### 3. Lightweight 2.5D Feature-Adaptive Conditioning
 
 <p align="center">
-  <img src="examples/static/3.png" width="96%" alt="Feature-Adaptive Conditioning Module">
+  <img src="examples/static/2.png" width="96%" alt="Feature-Adaptive Conditioning Module">
 </p>
 
 <p align="center">
-  <a href="examples/static/3.pdf">View PDF version</a>
+  <a href="examples/static/2.pdf">View PDF version</a>
 </p>
 
 The three neighboring source slices are processed by a shared encoder to obtain slice-wise feature representations. These features are concatenated and passed to a lightweight attention generator consisting of a 3×3 convolution, Group Normalization, SiLU activation, and a 1×1 convolution.
